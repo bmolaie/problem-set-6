@@ -11,7 +11,9 @@
  */
 
 function sayHello() {
-
+let hello = document.getElementById("canvas1").getContext('2d');
+hello.font = '48px sans-serif';
+hello.strokeText('Hello, World!', 10, 50);
 }
 
 /*

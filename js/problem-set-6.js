@@ -40,30 +40,27 @@ hello.strokeText('Hello, World!', 10, 50);
  */
 
 function drawRectangle() {
+  let height = Number(prompt("Height:"));
+  let width = Number(prompt("Width:"));
+  let x = Number(prompt("X:"));
+  let y = Number(prompt("Y:"));
   let canvas = document.getElementById('canvas2');
-  let ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, canvas.width, canvas.height)
-  while(true){
-    let height=Number(prompt("Height:"))
-    let width=Number(prompt("Width:"))
-    let x=Number(prompt("X:"))
-    let y=Number(prompt("Y:"))
-   if(isNaN(height)==true || isNaN(width)==true || isNaN(x)==true || isNaN(y)==true){
-  alert("One of your inputs is not a number.");
-}else if(width<1){
-  alert("Your width is too small.");
-}else if(height<1){
-  alert("Your height is too small.");
-}else if(x<5){
-  alert("Your x-coordinate is too small.");
-}else if(y<5){
-  alert("Your y-coordinate is too small.");
-}else if(height+y>512 || width+x>1024){
-  alert("This rectangle will not fit on the canvas.");
-}else{
-  ctx.rect(x,y,width,height);
-  ctx.stroke();
-}
+  const context = canvas.getContext('2d');
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  
+  if (isNaN(height) == true || isNaN(width) == true || isNaN(x) == true || isNaN(y) == true) {
+    alert("One of your inputs is not a number.");
+  } else if (height < 1) {
+    alert("Your height is too small.");
+  } else if (width < 1) {
+    alert("Your width is too small.");
+  } else if (x < 5) {
+    alert("Your x-coordinate is too small.");
+  } else if (y < 5) {
+    alert("Your y-coordinate is too small.");
+  } else {
+    context.strokeRect(x, y, width, height);
+  }
 }
 
 /*

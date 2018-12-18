@@ -174,31 +174,23 @@ function drawTriangle() {
  */
 
 function drawSmileyFace() {
+  const canvas = document.getElementById("canvas5");
+  const context = canvas.getContext("2d");
   let radius = Number(prompt("Radius:"));
-  let canvas = document.getElementById('canvas5');
-  const context = canvas.getContext('2d');
   context.clearRect(0, 0, canvas.width, canvas.height);
-  if (isNaN(radius) == true) {
-    alert("Your input is not a number.");
-  } 
-  else if (radius < 1) {
-    alert("Your radius is too small.");
-  } 
-  else if (radius > 250.5){
+  if(radius*2+10 > canvas.width || radius*2+10 > canvas.height){
     alert("The smiley face will not fit on the canvas.");
-  } 
-  else {
+  }
+  else{
     context.beginPath();
-    context.arc(radius + 10, radius + 10, radius, 0 * Math.PI, 2 * Math.PI);
-    context.moveTo(1.7 * radius + 10, radius + 10);
-    context.arc(radius + 10, radius + 10, 0.7 * radius, 0 * Math.PI, Math.PI);
-    context.moveTo(0.8 * radius + 10, 0.7 * radius + 10);
-    context.arc(0.7 * radius + 10, 0.7 * radius + 10, 0.1 * radius, 0 * Math.PI, 2 * Math.PI);
-    context.moveTo(1.4 * radius + 10, 0.7 * radius + 10);
-    context.arc(1.3 * radius + 10, 0.7 * radius + 10, 0.1 * radius, 0 * Math.PI, 2 * Math.PI);
-    context.closePath();
+    context.arc(radius+10, radius+10, radius, 0, 2*Math.PI);
+    context.moveTo((radius*.3)+10+(.1*radius), (radius*.6)+10);
+    context.arc(radius*.3+10, radius*.6+10, radius*.1, 0, 2*Math.PI);
+    context.moveTo((radius*1.6)+10+(.1*radius), (radius*.6)+30);
+    context.arc(radius*1.6+10, radius*.6+30, radius*.1, 0, 2*Math.PI);
+    context.moveTo(radius+10+radius*.7, radius+20);
+    context.arc(radius+10, radius+20, radius*.7, 0, 1*Math.PI);
     context.stroke();
-    lineWidth = 1;
   }
 }
 
@@ -377,63 +369,53 @@ function drawPyramid() {
  */
 
 function drawHouse() {
-  let ctx = document.getElementById("canvas9").getContext("2d");
-  ctx.clearRect(0,0,1024,760);
+  const canvas = document.getElementById("canvas9");
+  const context = canvas.getContext("2d");
   let houseColor = prompt("House Color:");
   let doorColor = prompt("Front Door Color:");
-  if ((houseColor == "blue" || houseColor == "brown"|| houseColor == "green" || houseColor == "orange" || houseColor == "purple" || houseColor == "red" || houseColor == "yellow") && (doorColor == "blue" || doorColor == "brown"|| doorColor == "green" || doorColor == "orange" || doorColor == "purple" || doorColor == "red" || doorColor == "yellow")){
-
-    ctx.fillStyle="black";
-    ctx.fillRect(150,300,724,450);
-    ctx.fillStyle=houseColor;
-    ctx.fillRect(151,301,722,448);
-    ctx.fill();
-
-    ctx.beginPath();
-    ctx.moveTo(150,300);
-    ctx.lineTo(512,10);
-    ctx.lineTo(874,300);
-    ctx.lineTo(150,300);
-    ctx.fillStyle="black";
-    ctx.fill();
-    ctx.closePath();
-    ctx.beginPath();
-    ctx.moveTo(153,299);
-    ctx.lineTo(512,12);
-    ctx.lineTo(871,299);
-    ctx.lineTo(151,299);
-    ctx.fillStyle="gray";
-    ctx.fill();
-    ctx.closePath();
-
-    ctx.fillStyle="black";
-    ctx.fillRect(260,620,80,80);
-    ctx.fillRect(260,400,80,80);
-    ctx.fillRect(684,620,80,80);
-    ctx.fillRect(684,400,80,80);
-    ctx.fillStyle="lightblue";
-    ctx.fillRect(261,621,78,78);
-    ctx.fillRect(261,401,78,78);
-    ctx.fillRect(685,621,78,78);
-    ctx.fillRect(685,401,78,78);
-
-    ctx.fillStyle="black"
-    ctx.fillRect(462,590,100,160);
-    ctx.fillStyle=doorColor;
-    ctx.fillRect(463,591,98,158);
-
-    ctx.beginPath();
-    ctx.arc(545,670,8,0,Math.PI*2,true);
-    ctx.fillStyle="black";
-    ctx.fill();
-    ctx.closePath();
-    ctx.beginPath();
-    ctx.arc(545,670,7,0,Math.PI*2,true);
-    ctx.fillStyle="gold";
-    ctx.fill();
-    ctx.closePath();
-
-  } else {
-    alert("One of your colors is not supported");
+  if(houseColor!="blue" && houseColor!="brown" && houseColor!="green" && houseColor!="orange" && houseColor!="purple" && houseColor!="red" && houseColor!="yellow" || doorColor!="blue" && doorColor!="brown" && doorColor!="green" && doorColor!="orange" && doorColor!="purple" && doorColor!="red" && doorColor!="yellow"){
+    alert("One of your colors is not supported.")
+  }
+  else{
+    let houseHeight = (canvas.height / 5) * 3;
+    let houseWidth = canvas.width - 300;
+    context.rect(150, canvas.height-10-houseHeight, houseWidth, houseHeight);
+    
+    context.fillStyle = houseColor;
+    context.fill();
+    context.strokeStyle = "black";
+    context.stroke();
+    context.beginPath();
+    context.moveTo(512, 10);
+    context.lineTo(151,294);
+    context.lineTo(873,294);
+    context.closePath();
+    context.lineWidth = 2;
+    context.stroke();
+    
+    context.fillStyle = "gray";
+    context.fill();
+    
+    context.fillStyle = doorColor;
+    context.fillRect(450, 540, 124, 210);
+    context.strokeRect(450,540,124,210);
+    context.lineWidth = 2;
+    context.beginPath();
+    context.moveTo(568, 645);
+    context.arc(560, 645, 8, 0, Math.PI*2);
+    context.stroke();
+    
+    context.fillStyle = "gold";
+    context.fill();
+    
+    context.fillStyle = "lightBlue";
+    context.fillRect(250, 367, 100, 100);
+    context.strokeRect(250, 367, 100, 100);
+    context.fillRect(250, canvas.height-185, 100, 100);
+    context.strokeRect(250, canvas.height-185, 100, 100);
+    context.fillRect(674, 367, 100, 100);
+    context.strokeRect(674, 367, 100, 100);
+    context.fillRect(674, canvas.height-185, 100, 100);
+    context.strokeRect(674, canvas.height-185, 100, 100);
   }
 }

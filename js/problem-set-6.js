@@ -174,23 +174,30 @@ function drawTriangle() {
  */
 
 function drawSmileyFace() {
-  const canvas = document.getElementById("canvas5");
-  const context = canvas.getContext("2d");
-  let radius = Number(prompt("Radius:"));
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  if(radius*2+10 > canvas.width || radius*2+10 > canvas.height){
+  const canvas = document.getElementById('canvas5');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  let radius=Number(prompt("Radius:"));
+  if(isNaN(radius)==true){
+    alert("Your input is not a number.");
+  }
+  else if(radius>250){
     alert("The smiley face will not fit on the canvas.");
   }
+  else if(radius<1){
+    alert("Your radius is too small.");
+  }
   else{
-    context.beginPath();
-    context.arc(radius+10, radius+10, radius, 0, 2*Math.PI);
-    context.moveTo((radius*.3)+10+(.1*radius), (radius*.6)+10);
-    context.arc(radius*.3+10, radius*.6+10, radius*.1, 0, 2*Math.PI);
-    context.moveTo((radius*1.6)+10+(.1*radius), (radius*.6)+30);
-    context.arc(radius*1.6+10, radius*.6+30, radius*.1, 0, 2*Math.PI);
-    context.moveTo(radius+10+radius*.7, radius+20);
-    context.arc(radius+10, radius+20, radius*.7, 0, 1*Math.PI);
-    context.stroke();
+    ctx.beginPath();
+    ctx.arc(10+radius,10+radius,radius,0,Math.PI*2);
+    ctx.moveTo(radius*1.7+10,radius+10);
+    ctx.arc(10+radius,10+radius,radius*0.7,0,Math.PI,false);
+    ctx.moveTo(radius*0.6+10,radius*0.5+10);
+    ctx.arc(10+radius*0.5,10+radius*0.5,radius*0.1,0,Math.PI*2);
+    ctx.moveTo(radius*1.6+10,radius*0.5+10);
+    ctx.arc(10+radius*1.5,10+radius*0.5,radius*0.1,0,Math.PI*2);
+    ctx.lineWidth=1;
+    ctx.stroke();
   }
 }
 
